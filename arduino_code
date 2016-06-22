@@ -1,0 +1,104 @@
+
+#define LS 2
+#define CS 4
+#define RS 8
+#define LM1 5
+#define LM2 3
+#define RM1 11
+#define RM2 10
+
+
+
+void setup ()
+{
+
+  pinMode(LS,INPUT);
+  pinMode(CS,INPUT);
+  pinMode(RS,INPUT);
+  pinMode(LM1,OUTPUT);
+  pinMode(LM2,OUTPUT);
+  pinMode(RM1,OUTPUT);
+  pinMode(RM2,OUTPUT);
+ 
+}
+void loop (){
+              
+
+
+              //condition for move forward
+             if(!(digitalRead(LS)) &&  !(digitalRead(RS)) && digitalRead(CS))           
+                  {
+                   
+                  straight();  
+                  }
+
+           //condition for turnright
+             if(!(digitalRead(LS)) &&  digitalRead(RS) && (digitalRead(CS)))
+                  {
+                    
+                   turnright();
+                  } 
+ 
+           //condition for turnleft            
+             if(digitalRead(LS)  && (digitalRead(CS)) && !(digitalRead(RS)))
+                  {
+                    turnleft();
+                  }
+
+  
+
+           //condition for endmotion
+            if(digitalRead(LS) && digitalRead(RS) && digitalRead(CS))
+                  {  
+                    endmotion();
+                    }
+/*
+           //condition for  back
+            if(!(digitalRead(LS)) &&  !(digitalRead(RS)) && !(digitalRead(CS)))           
+                  {
+                   
+                     back();
+                  }
+ */        
+}
+
+
+//Functions of moments
+void straight()
+{
+    analogWrite(LM1,120);
+    analogWrite(LM2,0);
+    analogWrite(RM1,120);
+    analogWrite(RM2,0);
+
+}
+void turnright()
+{
+    analogWrite(LM1,80);
+    analogWrite(LM2,0);
+    analogWrite(RM1,0);  
+    analogWrite(RM2,0);
+}
+void turnleft()
+{
+    analogWrite(LM1,0); 
+    analogWrite(LM2,0);
+    analogWrite(RM1,80);
+    analogWrite(RM2,0);
+}
+void endmotion()
+{
+    analogWrite(LM1,0);
+    analogWrite(LM2,0);
+    analogWrite(RM1,0);
+    analogWrite(RM2,0);
+}
+void back()
+{
+    analogWrite(LM1,0);
+    analogWrite(LM2,80);
+    analogWrite(RM1,0);
+    analogWrite(RM2,80);
+}
+
+
